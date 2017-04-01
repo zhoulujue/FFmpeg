@@ -10,10 +10,12 @@ function xcf {
 
 	for name in $(ls *-*.so | xargs -n1)
 	do
-		targertName=$(echo $name | awk -F "-" '{print $1}')
+		#targertName=$(echo $name | awk -F "-" '{print $1}')
+		targertName=$name
 		echo $targertName
 		suffix=.so
-		cp $name $TARGETDIR/$targertName$suffix
+		#cp $name $TARGETDIR/$targertName$suffix
+		cp $name $TARGETDIR/$targertName
 	done
 
 	cd $currentDir
