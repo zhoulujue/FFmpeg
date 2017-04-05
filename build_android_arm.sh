@@ -1,7 +1,7 @@
 #!/bin/bash
 export TMPDIR=/Users/michael/ffmpegbuilddir/temp/
 NDK=/Users/michael/Library/Android/sdk/ndk-bundle
-SYSROOT=$NDK/platforms/android-14/arch-arm/
+SYSROOT=$NDK/platforms/android-16/arch-arm/
 TOOLCHAIN=$NDK/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64
 
 CPU=arm
@@ -12,6 +12,8 @@ function build_one
 {
 ./configure \
 --prefix=$PREFIX \
+--enable-gpl \
+--enable-libx264 \
 --enable-shared \
 --enable-filter=crop \
 --enable-filter=rotate \
@@ -20,6 +22,7 @@ function build_one
 --enable-encoder=mpeg4 \
 --enable-encoder=aac \
 --enable-encoder=png \
+--enable-encoder=libx264 \
 --disable-decoders \
 --enable-decoder=mpeg4 \
 --enable-decoder=h264 \
