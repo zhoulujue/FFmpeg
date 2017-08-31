@@ -8,6 +8,11 @@ CPU=arm
 PREFIX=/Users/michael/ffmpegbuilddir/ffmpeg-install-dir/arm/
 ADDI_CFLAGS="-marm"
 
+# 加入x264编译库
+EXTRA_DIR=./../XCFx264/x264/build/android
+EXTRA_CFLAGS="-I./${EXTRA_DIR}/include"
+EXTRA_LDFLAGS="-L./${EXTRA_DIR}/lib"
+
 function build_one
 {
 ./configure \
@@ -27,6 +32,7 @@ function build_one
 --enable-decoder=mpeg4 \
 --enable-decoder=h264 \
 --enable-decoder=aac \
+--enable-parser=h264 \
 --disable-static \
 --disable-doc \
 --disable-ffmpeg \
@@ -41,8 +47,8 @@ function build_one
 --arch=arm \
 --enable-cross-compile \
 --sysroot=$SYSROOT \
---extra-cflags="-Os -fpic $ADDI_CFLAGS" \
---extra-ldflags="$ADDI_LDFLAGS" \
+--extra-cflags="-Os -fpic $ADDI_CFLAGS $EXTRA_CFLAGS" \
+--extra-ldflags="$ADDI_LDFLAGS $EXTRA_LDFLAGS" \
 $ADDITIONAL_CONFIGURE_FLAG
 make clean
 make
